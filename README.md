@@ -29,6 +29,7 @@ To only retune selected notes, make a selection before running the plugin.
 All these edos follow a fairly simple logic: one sharp/flat represents 4 steps. 
 
 | Edo | Steps between D-E-F-G-A-B-C-D |
+| ---: | :----: |
 | 27 | 5155515 |
 | 34 | 6266626 |
 | 41 | 7377737 |
@@ -37,7 +38,7 @@ These are the accidentals used by the plugin.
 They can be found in the [advanced palette](https://musescore.org/en/handbook/palettes-and-workspaces#workspaces).
 
 | Steps | Accidental |
-| ---: | :-----:|
+| ---: | :----: |
 | -9  | ![Double flat down](images/bbv.png) |
 | -8  | ![Double flat](images/bb.png) |
 | -7  | ![Double flat up](images/bbu.png) |
@@ -74,7 +75,7 @@ A very simple one. It doesn't even use custom accidentals.
 These are the accidentals used by the plugin.
 
 | Steps | Accidental |
-| ---: | :-----:|
+| ---: | :----: |
 | -2  | ![Double flat](images/bb.png) |
 | -1  | ![Flat](images/b.png) |
 | 0   | ![Natural](images/n.png) |
@@ -98,7 +99,7 @@ system/staff text containing accidental code:
 #### Accidental Code
 
 | Accidental | Textual representation |
-| ----: | :----: |
+| ---: | :----: |
 | ![Doubleflat down](images/bbv.png) | `bbv` |
 | ![Doubleflat](images/bb.png) | `bb` |
 | ![Doubleflat up](images/bbu.png) | `bb^` |
@@ -106,13 +107,15 @@ system/staff text containing accidental code:
 | ![Flat down](images/bv.png) | `bv`  |
 | ![Flat](images/b.png)   | `b`  |
 | ![Flat up](images/bu.png)   | `b^` |
-| ![Down](images/d.png)   | `v` |
+| ![Semiflat](images/d.png)   | `d` |
+| ![Down](images/v.png)   | `v` |
 | ![Natural](images/n.png) | Leave blank / any other character  |
 | ![Up](images/u.png) | `^` |
+| ![Semisharp](images/+.png) | `+` |
 | ![Sharp down](images/sd.png) | `#v` |
 | ![Sharp](images/s.png) | `#`  |
 | ![Sharp up](images/su.png) | `#^`  |
-| ![Sesquisharp](images/ss.png) | `#+` or `+#`  |
+| ![Sesquisharp](images/s+.png) | `#+` or `+#`  |
 | ![Doublesharp down](images/xv.png) | `xv`  |
 | ![Doublesharp](images/x.png) | `x`  |
 | ![Doublesharp up](images/xu.png) | `x+`  |
