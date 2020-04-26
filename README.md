@@ -21,13 +21,10 @@ To only retune selected notes, make a selection before running the plugin.
 
 #### Ups and Downs Notation
 
-> Plugin file:
-
-> https://github.com/floracanou/musescore-n-tet-plugins/blob/master/41-TET.qml
-
-> https://github.com/floracanou/musescore-n-tet-plugins/blob/master/34-TET.qml
-
-> https://github.com/floracanou/musescore-n-tet-plugins/blob/master/27-TET.qml
+> Plugin file: \
+> https://github.com/floracanou/musescore-n-tet-plugins/blob/master/41-TET.qml \
+> https://github.com/floracanou/musescore-n-tet-plugins/blob/master/34-TET.qml \
+> https://github.com/floracanou/musescore-n-tet-plugins/blob/master/27-TET.qml \
 
 All these edos follow a fairly simple logic: one sharp/flat represents 4 steps. 
 
@@ -71,8 +68,8 @@ These are the accidentals used by the plugin.
 | Steps | Accidental | Steps | Accidental |
 | :----: | :----: | :----: | :----: |
 | 0   | ![Natural](images/n.png) |||
-| -2  | ![Double flat](images/bb.png) | +2  | ![Double sharp](images/x.png) |
 | -1  | ![Flat](images/b.png) | +1  | ![Sharp](images/s.png) |
+| -2  | ![Double flat](images/bb.png) | +2  | ![Double sharp](images/x.png) |
 
 ### Custom key signatures
 
@@ -93,15 +90,15 @@ system/staff text containing accidental code:
 | Accidental | Textual representation | Accidental | Textual representation |
 | :----: | :----: | :----: | :----: |
 | ![Natural](images/n.png) | Leave blank / any other character  |
-| ![Doubleflat down](images/bbv.png) | `bbv` | ![Doublesharp up](images/xu.png) | `x+`  |
-| ![Doubleflat](images/bb.png) | `bb` | ![Doublesharp](images/x.png) | `x`  |
-| ![Doubleflat up](images/bbu.png) | `bb^` | ![Doublesharp down](images/xv.png) | `xv`  |
-| ![Sesquiflat](images/db.png) | `db` or `bd`  | ![Sesquisharp](images/s+.png) | `#+` or `+#`  |
-| ![Flat down](images/bv.png) | `bv`  | ![Sharp up](images/su.png) | `#^`  |
-| ![Flat](images/b.png)   | `b`  | ![Sharp](images/s.png) | `#`  |
-| ![Flat up](images/bu.png)   | `b^` | ![Sharp down](images/sv.png) | `#v` |
-| ![Semiflat](images/d.png)   | `d` | ![Semisharp](images/+.png) | `+` |
 | ![Down](images/v.png)   | `v` | ![Up](images/u.png) | `^` |
+| ![Semiflat](images/d.png)   | `d` | ![Semisharp](images/+.png) | `+` |
+| ![Flat up](images/bu.png)   | `b^` | ![Sharp down](images/sv.png) | `#v` |
+| ![Flat](images/b.png)   | `b`  | ![Sharp](images/s.png) | `#`  |
+| ![Flat down](images/bv.png) | `bv`  | ![Sharp up](images/su.png) | `#^`  |
+| ![Sesquiflat](images/db.png) | `db` or `bd`  | ![Sesquisharp](images/s+.png) | `#+` or `+#`  |
+| ![Doubleflat up](images/bbu.png) | `bb^` | ![Doublesharp down](images/xv.png) | `xv`  |
+| ![Doubleflat](images/bb.png) | `bb` | ![Doublesharp](images/x.png) | `x`  |
+| ![Doubleflat down](images/bbv.png) | `bbv` | ![Doublesharp up](images/xu.png) | `x+`  |
 
 ![Staff text custom key sig](images/2018/06/staff-text-custom-key-sig.png)
 
