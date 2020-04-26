@@ -24,7 +24,7 @@ To only retune selected notes, make a selection before running the plugin.
 > Plugin file: \
 > https://github.com/floracanou/musescore-n-tet-plugins/blob/master/41-TET.qml \
 > https://github.com/floracanou/musescore-n-tet-plugins/blob/master/34-TET.qml \
-> https://github.com/floracanou/musescore-n-tet-plugins/blob/master/27-TET.qml \
+> https://github.com/floracanou/musescore-n-tet-plugins/blob/master/27-TET.qml
 
 All these edos follow a fairly simple logic: one sharp/flat represents 4 steps. 
 
@@ -58,7 +58,7 @@ and you should probably never need them.
 
 #### Meantone notation
 
-> Plugin file:
+> Plugin file: \
 > https://github.com/euwbah/musescore-n-tet-plugins/blob/master/19-TET-Simple.qml
 
 A very simple one. It doesn't even use custom accidentals. 
@@ -81,9 +81,8 @@ Should you want to create a microtonal key signature and have it affect the
 playback, you have to explicitly declare the custom key signature using
 system/staff text containing accidental code:
 
-> Note that explicit accidentals will still take precedence over the
-> declared custom key signature, behaving exactly the same way a key signature
-> would.
+Note that explicit accidentals will still take precedence over the
+declared custom key signature, behaving exactly the same way a key signature would.
 
 #### Accidental Code
 
@@ -127,14 +126,14 @@ that does not represent an accidental.
 
 Spaces/newlines can be placed before or after the dots to improve readability.
 
-*For example:*
+For example:
 Ab-down major in ups-and-downs mode can be denoted like this: `.#v.#v.#v.v.v.v.v`
 representing the key signature of F#v, C#v, G#v, D#v, Av, Ev, Bv.
 
 For a meantone-ish sound, this: `.#v.#v.#v.v.d.d.d`
 representing the key signature of F#v, C#v, G#v, D#v, Ad, Ed, Bd.
 
-*IMPORTANT!* Following a custom key signature, should there be a modulation to any standard
+**Important:** Following a custom key signature, should there be a modulation to any standard
 key signature, it is still necessary to reset the custom key signature to the default, that is,
 `.......`. Otherwise, the previous custom key signature would still be in effect, as it is being
 overridden. Regular and custom key signatures are not compatible with each other.
