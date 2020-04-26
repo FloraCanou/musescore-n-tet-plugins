@@ -22,42 +22,36 @@ To only retune selected notes, make a selection before running the plugin.
 #### Ups and Downs Notation
 
 > Plugin file:
+
 > https://github.com/floracanou/musescore-n-tet-plugins/blob/master/41-TET.qml
+
 > https://github.com/floracanou/musescore-n-tet-plugins/blob/master/34-TET.qml
+
 > https://github.com/floracanou/musescore-n-tet-plugins/blob/master/27-TET.qml
 
 All these edos follow a fairly simple logic: one sharp/flat represents 4 steps. 
 
 | Edo | Steps between D-E-F-G-A-B-C-D |
-| ---: | :----: |
-| 27 | 5155515 |
-| 34 | 6266626 |
-| 41 | 7377737 |
+| :----: | :----: |
+| 27 | 5-1-5-5-5-1-5 |
+| 34 | 6-2-6-6-6-2-6 |
+| 41 | 7-3-7-7-7-3-7 |
 
 These are the accidentals used by the plugin. 
 They can be found in the [advanced palette](https://musescore.org/en/handbook/palettes-and-workspaces#workspaces).
 
-| Steps | Accidental |
-| ---: | :----: |
-| -9  | ![Double flat down](images/bbv.png) |
-| -8  | ![Double flat](images/bb.png) |
-| -7  | ![Double flat up](images/bbu.png) |
-| -6  | ![Sesquiflat](images/db.png) |
-| -5  | ![Flat down](images/bv.png) |
-| -4  | ![Flat](images/b.png) |
-| -3  | ![Flat up](images/bu.png) |
-| -2  | ![Semiflat](images/d.png) |
-| -1  | ![Down](images/v.png) |
-| 0   | ![Natural](images/n.png) |
-| +1  | ![Up](images/u.png) |
-| +2  | ![Semisharp](images/+.png) |
-| +3  | ![Sharp down](images/sv.png) |
-| +4  | ![Sharp](images/s.png) |
-| +5  | ![Sharp up](images/su.png) |
-| +6  | ![Sesquisharp](images/s+.png) |
-| +7  | ![Double sharp down](images/xv.png) |
-| +8  | ![Double sharp](images/x.png) |
-| +9  | ![Double sharp up](images/xu.png) |
+| Steps | Accidental | Steps | Accidental |
+| :----: | :----: | :----: | :----: |
+| 0   | ![Natural](images/n.png) |||
+| -1  | ![Down](images/v.png) | +1  | ![Up](images/u.png) |
+| -2  | ![Semiflat](images/d.png) | +2  | ![Semisharp](images/+.png) |
+| -3  | ![Flat up](images/bu.png) | +3  | ![Sharp down](images/sv.png) |
+| -4  | ![Flat](images/b.png) | +4  | ![Sharp](images/s.png) |
+| -5  | ![Flat down](images/bv.png) | +5  | ![Sharp up](images/su.png) |
+| -6  | ![Sesquiflat](images/db.png) | +6  | ![Sesquisharp](images/s+.png) |
+| -7  | ![Double flat up](images/bbu.png) | +7  | ![Double sharp down](images/xv.png) |
+| -8  | ![Double flat](images/bb.png) | +8  | ![Double sharp](images/x.png) |
+| -9  | ![Double flat down](images/bbv.png) | +9  | ![Double sharp up](images/xu.png) |
 
 **Important**: I've commented out +-9 in 34-edo, and +-9 and +-7 in 27-edo
 because they exceed the 300-cent limit of display, 
@@ -74,13 +68,11 @@ A very simple one. It doesn't even use custom accidentals.
 
 These are the accidentals used by the plugin.
 
-| Steps | Accidental |
-| ---: | :----: |
-| -2  | ![Double flat](images/bb.png) |
-| -1  | ![Flat](images/b.png) |
-| 0   | ![Natural](images/n.png) |
-| +1  | ![Sharp](images/s.png) |
-| +2  | ![Double sharp](images/x.png) |
+| Steps | Accidental | Steps | Accidental |
+| :----: | :----: | :----: | :----: |
+| 0   | ![Natural](images/n.png) |||
+| -2  | ![Double flat](images/bb.png) | +2  | ![Double sharp](images/x.png) |
+| -1  | ![Flat](images/b.png) | +1  | ![Sharp](images/s.png) |
 
 ### Custom key signatures
 
@@ -98,40 +90,31 @@ system/staff text containing accidental code:
 
 #### Accidental Code
 
-| Accidental | Textual representation |
-| ---: | :----: |
-| ![Doubleflat down](images/bbv.png) | `bbv` |
-| ![Doubleflat](images/bb.png) | `bb` |
-| ![Doubleflat up](images/bbu.png) | `bb^` |
-| ![Sesquiflat](images/db.png) | `db` or `bd`  |
-| ![Flat down](images/bv.png) | `bv`  |
-| ![Flat](images/b.png)   | `b`  |
-| ![Flat up](images/bu.png)   | `b^` |
-| ![Semiflat](images/d.png)   | `d` |
-| ![Down](images/v.png)   | `v` |
+| Accidental | Textual representation | Accidental | Textual representation |
+| :----: | :----: | :----: | :----: |
 | ![Natural](images/n.png) | Leave blank / any other character  |
-| ![Up](images/u.png) | `^` |
-| ![Semisharp](images/+.png) | `+` |
-| ![Sharp down](images/sd.png) | `#v` |
-| ![Sharp](images/s.png) | `#`  |
-| ![Sharp up](images/su.png) | `#^`  |
-| ![Sesquisharp](images/s+.png) | `#+` or `+#`  |
-| ![Doublesharp down](images/xv.png) | `xv`  |
-| ![Doublesharp](images/x.png) | `x`  |
-| ![Doublesharp up](images/xu.png) | `x+`  |
+| ![Doubleflat down](images/bbv.png) | `bbv` | ![Doublesharp up](images/xu.png) | `x+`  |
+| ![Doubleflat](images/bb.png) | `bb` | ![Doublesharp](images/x.png) | `x`  |
+| ![Doubleflat up](images/bbu.png) | `bb^` | ![Doublesharp down](images/xv.png) | `xv`  |
+| ![Sesquiflat](images/db.png) | `db` or `bd`  | ![Sesquisharp](images/s+.png) | `#+` or `+#`  |
+| ![Flat down](images/bv.png) | `bv`  | ![Sharp up](images/su.png) | `#^`  |
+| ![Flat](images/b.png)   | `b`  | ![Sharp](images/s.png) | `#`  |
+| ![Flat up](images/bu.png)   | `b^` | ![Sharp down](images/sv.png) | `#v` |
+| ![Semiflat](images/d.png)   | `d` | ![Semisharp](images/+.png) | `+` |
+| ![Down](images/v.png)   | `v` | ![Up](images/u.png) | `^` |
 
 ![Staff text custom key sig](images/2018/06/staff-text-custom-key-sig.png)
 
 You can indicate custom key signatures by entering the key signature using
 System Text or Staff Text.
 
-- Use **System Text** (`Ctrl` + `Shift` + `T`) if you want the key signature code to affect
+- Use *System Text* (`Ctrl` + `Shift` + `T`) if you want the key signature code to affect
   all staves from there onwards
-- Use **Staff Text** (`Shift` + `T`) if you only want the code to affect the staff that it is on.
-  This is especially useful when using custom **local** key signatures!
+- Use *Staff Text* (`Shift` + `T`) if you only want the code to affect the staff that it is on.
+  This is especially useful when using custom *local* key signatures!
 - Remember to make the custom key signature code invisible! (Press `V` to toggle visibility)
 
-Key signature code syntax
+#### Key signature code syntax
 
 **This is different from the original** because I reckon it more intuitive to do in fifths.
 
@@ -141,20 +124,20 @@ Key signature code syntax
 4. Put the required accidental for **C**
 5. Repeat from **F** thru **B** 
 
-Note that There **must** be seven `.` in total,
+Note that There *must* be seven `.` in total,
 natural accidentals are denoted by leaving the space blank, or using any other character
 that does not represent an accidental.
 
 Spaces/newlines can be placed before or after the dots to improve readability.
 
-**For example:**
+*For example:*
 Ab-down major in ups-and-downs mode can be denoted like this: `.#v.#v.#v.v.v.v.v`
 representing the key signature of F#v, C#v, G#v, D#v, Av, Ev, Bv.
 
 For a meantone-ish sound, this: `.#v.#v.#v.v.d.d.d`
 representing the key signature of F#v, C#v, G#v, D#v, Ad, Ed, Bd.
 
-**IMPORTANT!** Following a custom key signature, should there be a modulation to any standard
+*IMPORTANT!* Following a custom key signature, should there be a modulation to any standard
 key signature, it is still necessary to reset the custom key signature to the default, that is,
 `.......`. Otherwise, the previous custom key signature would still be in effect, as it is being
 overridden. Regular and custom key signatures are not compatible with each other.
