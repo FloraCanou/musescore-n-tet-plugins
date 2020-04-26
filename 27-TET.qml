@@ -5,162 +5,206 @@ import MuseScore 3.0
 
 MuseScore {
       version:  "1.3.5"
-      description: "Retune selection to 31-TET in Enharmonic Ups & Downs mode (Dbb is C), or whole score if nothing selected."
-      menuPath: "Plugins.31-TET.Retune 31-TET (Enharmonic Ups and Downs)"
+      description: "Retune selection to 27-TET, or whole score if nothing selected."
+      menuPath: "Plugins.Notes.Retune 27-TET"
 
       // WARNING! This doesn't validate the accidental code!
       property variant customKeySigRegex: /\.(.*)\.(.*)\.(.*)\.(.*)\.(.*)\.(.*)\.(.*)/g
-
+      property var stepSize: 1200.0/27
       property variant centOffsets: {
         'a': {
-          '-5': 38.70967742 * -5 + 200, // Abb
-          '-4': 38.70967742 * -4,       // Adb
-          '-3': 38.70967742 * -3,       // Abv
-          '-2': 38.70967742 * -2 + 100, // Ab
-          '-1': 38.70967742 * -1,       // Av
-           0: 38.70967742 * 0,         // A
-           1: 38.70967742 * 1,         // A^
-           2: 38.70967742 * 2 - 100,   // A#
-           3: 38.70967742 * 3,         // A#^
-           4: 38.70967742 * 4,         // A#+
-           5: 38.70967742 * 5 - 200    // Ax
+          //'-9': stepSize * -20 + 500,        //Abbv
+          '-8': stepSize * -19 + 500 + 200,  //Abb
+          //'-7': stepSize * -18 + 500,        //Abb^
+          '-6': stepSize * -17 + 500,        //Adb
+          '-5': stepSize * -16 + 500,        //Abv
+          '-4': stepSize * -15 + 500 + 100,  //Ab
+          '-3': stepSize * -14 + 500,        //Ab^
+          '-2': stepSize * -13 + 500,        //Ad
+          '-1': stepSize * -12 + 500,        //Av
+           0: stepSize * -11 + 500,          //A
+           1: stepSize * -10 + 500,          //A^
+           2: stepSize * -9 + 500,          //A+
+           3: stepSize * -8 + 500,          //A#v
+           4: stepSize * -7 + 500 - 100,    //A#
+           5: stepSize * -6 + 500,           //A#^
+           6: stepSize * -5 + 500,           //A+#
+           //7: stepSize * -4 + 500,           //Axv
+           8: stepSize * -3 + 500 - 200,     //Ax
+           //9: stepSize * -2 + 500,           //Ax^
         },
         'b': {
-          '-5': 38.70967742 * 0 - 200 + 200,
-          '-4': 38.70967742 * 1 - 200,
-          '-3': 38.70967742 * 2 - 200,
-          '-2': 38.70967742 * 3 - 200 + 100,
-          '-1': 38.70967742 * 4 - 200,
-           0: 38.70967742 * 5 - 200,
-           1: 38.70967742 * 6 - 200,
-           2: 38.70967742 * 7 - 200 - 100,
-           3: 38.70967742 * 8 - 200,
-           4: 38.70967742 * 9 - 200,
-           5: 38.70967742 * 10 - 200 - 200
+          //'-9': stepSize * -15 + 300,
+          '-8': stepSize * -14 + 300 + 200,
+          //'-7': stepSize * -13 + 300,
+          '-6': stepSize * -12 + 300,
+          '-5': stepSize * -11 + 300,
+          '-4': stepSize * -10 + 300 + 100,
+          '-3': stepSize * -9 + 300,
+          '-2': stepSize * -8 + 300,
+          '-1': stepSize * -7 + 300,
+           0: stepSize * -6 + 300,
+           1: stepSize * -5 + 300,
+           2: stepSize * -4 + 300,
+           3: stepSize * -3 + 300,
+           4: stepSize * -2 + 300 - 100,
+           5: stepSize * -1 + 300,
+           6: stepSize * 0 + 300,
+           //7: stepSize * 1 + 300,
+           8: stepSize * 2 + 300 - 200,
+           //9: stepSize * 3 + 300,
         },
         'c': {
-          '-5': 38.70967742 * 3 - 300 + 200,
-          '-4': 38.70967742 * 4 - 300,
-          '-3': 38.70967742 * 5 - 300,
-          '-2': 38.70967742 * 6 - 300 + 100,
-          '-1': 38.70967742 * 7 - 300,
-           0: 38.70967742 * 8 - 300,
-           1: 38.70967742 * 9 - 300,
-           2: 38.70967742 * 10 - 300 - 100,
-           3: 38.70967742 * 11 - 300,
-           4: 38.70967742 * 12 - 300,
-           5: 38.70967742 * 13 - 300 - 200
+          //'-9': stepSize * -14 + 200,
+          '-8': stepSize * -13 + 200 + 200,
+          //'-7': stepSize * -12 + 200,
+          '-6': stepSize * -11 + 200,
+          '-5': stepSize * -10 + 200,
+          '-4': stepSize * -9 + 200 + 100,
+          '-3': stepSize * -8 + 200,
+          '-2': stepSize * -7 + 200,
+          '-1': stepSize * -6 + 200,
+           0: stepSize * -5 + 200,
+           1: stepSize * -4 + 200,
+           2: stepSize * -3 + 200,
+           3: stepSize * -2 + 200,
+           4: stepSize * -1 + 200 - 100,
+           5: stepSize * -0 + 200,
+           6: stepSize * 1 + 200,
+           //7: stepSize * 2 + 200,
+           8: stepSize * 3 + 200 - 200,
+           //9: stepSize * 4 + 200,
         },
         'd': {
-          '-5': 38.70967742 * 8 - 500 + 200,
-          '-4': 38.70967742 * 9 - 500,
-          '-3': 38.70967742 * 10 - 500,
-          '-2': 38.70967742 * 11 - 500 + 100,
-          '-1': 38.70967742 * 12 - 500,
-           0: 38.70967742 * 13 - 500,
-           1: 38.70967742 * 14 - 500,
-           2: 38.70967742 * 15 - 500 - 100,
-           3: 38.70967742 * 16 - 500,
-           4: 38.70967742 * 17 - 500,
-           5: 38.70967742 * 18 - 500 - 200
+          //'-9': stepSize * -9,
+          '-8': stepSize * -8 + 200,
+          //'-7': stepSize * -7,
+          '-6': stepSize * -6,
+          '-5': stepSize * -5,
+          '-4': stepSize * -4 + 100,
+          '-3': stepSize * -3,
+          '-2': stepSize * -2,
+          '-1': stepSize * -1,
+           0: 0,
+           1: stepSize * 1,
+           2: stepSize * 2,
+           3: stepSize * 3,
+           4: stepSize * 4 - 100,
+           5: stepSize * 5,
+           6: stepSize * 6,
+           //7: stepSize * 7,
+           8: stepSize * 8 - 200,
+           //9: stepSize * 9,
         },
         'e': {
-          '-5': 38.70967742 * 13 - 700 + 200,
-          '-4': 38.70967742 * 14 - 700,
-          '-3': 38.70967742 * 15 - 700,
-          '-2': 38.70967742 * 16 - 700 + 100,
-          '-1': 38.70967742 * 17 - 700,
-           0: 38.70967742 * 18 - 700,
-           1: 38.70967742 * 19 - 700,
-           2: 38.70967742 * 20 - 700 - 100,
-           3: 38.70967742 * 21 - 700,
-           4: 38.70967742 * 22 - 700,
-           5: 38.70967742 * 23 - 700 - 200
+          //'-9': stepSize * -4 - 200,
+          '-8': stepSize * -3 - 200 + 200,
+          //'-7': stepSize * -2 - 200,
+          '-6': stepSize * -1 - 200,
+          '-5': stepSize * 0 - 200,
+          '-4': stepSize * 1 - 200 + 100,
+          '-3': stepSize * 2 - 200,
+          '-2': stepSize * 3 - 200,
+          '-1': stepSize * 4 - 200,
+           0: stepSize * 5 - 200,
+           1: stepSize * 6 - 200,
+           2: stepSize * 7 - 200,
+           3: stepSize * 8 - 200,
+           4: stepSize * 9 - 200 - 100,
+           5: stepSize * 10 - 200,
+           6: stepSize * 11 - 200,
+           //7: stepSize * 12 - 200,
+           8: stepSize * 13 - 200 - 200,
+           //9: stepSize * 14 - 200,
         },
         'f': {
-          '-5': 38.70967742 * 16 - 800 + 200,
-          '-4': 38.70967742 * 17 - 800,
-          '-3': 38.70967742 * 18 - 800,
-          '-2': 38.70967742 * 19 - 800 + 100,
-          '-1': 38.70967742 * 20 - 800,
-           0: 38.70967742 * 21 - 800,
-           1: 38.70967742 * 22 - 800,
-           2: 38.70967742 * 23 - 800 - 100,
-           3: 38.70967742 * 24 - 800,
-           4: 38.70967742 * 25 - 800,
-           5: 38.70967742 * 26 - 800 - 200
+          //'-9': stepSize * -3 - 300,
+          '-8': stepSize * -2 - 300 + 200,
+          //'-7': stepSize * -1 - 300,
+          '-6': stepSize * 0 - 300,
+          '-5': stepSize * 1 - 300,
+          '-4': stepSize * 2 - 300 + 100,
+          '-3': stepSize * 3 - 300,
+          '-2': stepSize * 4 - 300,
+          '-1': stepSize * 5 - 300,
+           0: stepSize * 6 - 300,
+           1: stepSize * 7 - 300,
+           2: stepSize * 8 - 300,
+           3: stepSize * 9 - 300,
+           4: stepSize * 10 - 300 - 100,
+           5: stepSize * 11 - 300,
+           6: stepSize * 12 - 300,
+           //7: stepSize * 13 - 300,
+           8: stepSize * 14 - 300 - 200,
+           //9: stepSize * 15 - 300,
         },
         'g': {
-          '-5': 38.70967742 * 21 - 1000 + 200,
-          '-4': 38.70967742 * 22 - 1000,
-          '-3': 38.70967742 * 23 - 1000,
-          '-2': 38.70967742 * 24 - 1000 + 100,
-          '-1': 38.70967742 * 25 - 1000,
-           0: 38.70967742 * 26 - 1000,
-           1: 38.70967742 * 27 - 1000,
-           2: 38.70967742 * 28 - 1000 - 100,
-           3: 38.70967742 * 29 - 1000,
-           4: 38.70967742 * 30 - 1000,
-           5: 38.70967742 * 31 - 1000 - 200
+          //'-9': stepSize * 2 - 500,
+          '-8': stepSize * 3 - 500 + 200,
+          //'-7': stepSize * 4 - 500,
+          '-6': stepSize * 5 - 500,
+          '-5': stepSize * 6 - 500,
+          '-4': stepSize * 7 - 500 + 100,
+          '-3': stepSize * 8 - 500,
+          '-2': stepSize * 9 - 500,
+          '-1': stepSize * 10 - 500,
+           0: stepSize * 11 - 500,
+           1: stepSize * 12 - 500,
+           2: stepSize * 13 - 500,
+           3: stepSize * 14 - 500,
+           4: stepSize * 15 - 500 - 100,
+           5: stepSize * 16 - 500,
+           6: stepSize * 17 - 500,
+           //7: stepSize * 18 - 500,
+           8: stepSize * 19 - 500 - 200,
+           //9: stepSize * 20 - 500,
         }
       }
 
-      function convertAccidentalToSteps(acc) {
-        switch(acc.trim()) {
-        case 'bb':
-          return -5;
-        case 'db':
-          return -4;
-        case 'bv':
-          return -3;
-        case 'b':
-          return -2;
-        case 'v':
-        case 'b^':
-          return -1;
-        case '':
-          return 0;
-        case '^':
-        case '#v':
-          return 1;
-        case '#':
-          return 2;
-        case '#^':
-          return 3;
-        case '#+':
-          return 4;
-        case 'x':
-          return 5;
-        default:
-          return 0;
-        }
-      }
       function convertAccidentalToStepsOrNull(acc) {
         switch(acc.trim()) {
+        //case 'bbv':
+        //  return -9;
         case 'bb':
-          return -5;
+          return -8;
+        //case 'bb^':
+        //  return -7;
         case 'db':
-          return -4;
+          return -6;
+        case 'bd':
+          return -6;
         case 'bv':
-          return -3;
+          return -5;
         case 'b':
+          return -4;
+        case 'b^':
+          return -3;
+        case 'd':
           return -2;
         case 'v':
-        case 'b^':
           return -1;
         case '':
           return 0;
         case '^':
-        case '#v':
           return 1;
-        case '#':
+        case '+':
           return 2;
-        case '#^':
+        case '#v':
           return 3;
-        case '#+':
+        case '#':
           return 4;
-        case 'x':
+        case '#^':
           return 5;
+        case '#+':
+          return 6;
+        case '+#':
+          return 6;
+        //case 'xv':
+        //  return 7;
+        case 'x':
+          return 8;
+        //case 'x^':
+        //  return 9;
         default:
           return null;
         }
@@ -170,11 +214,11 @@ MuseScore {
       // a key signature object if str is a valid custom key sig code or null.
       //
       // Valid key sig code is denoted as such:
-      //  .c.d.e.f.g.a.b
-      // where identifiers c thru b denote a valid accidental code of which
+      //  .f.c.g.d.a.e.b
+      // where identifiers f thru b denote a valid accidental code of which
       // will apply to the respective notes.
       //
-      // For example, this is F-down major: .v.v.v.v.v.v.bv
+     // For example, this is Fd major (that sounds like a meantone): .d.d.d.d.b^.b^.bb^
       //
       // whitespace can be placed between dots and accidentals for readability.
       //
@@ -186,7 +230,7 @@ MuseScore {
         var keySig = {};
         var res = str.match(customKeySigRegex);
         // For code golfing
-        var notes = [null, 'c', 'd', 'e', 'f', 'g', 'a', 'b'];
+        var notes = [null, 'f', 'c', 'g', 'd', 'a', 'e', 'b'];
 
         if (res === null)
           return null;
@@ -196,9 +240,9 @@ MuseScore {
           if (acc !== null)
             keySig[notes[i]] = acc;
           else
-            keySig[notes[i]] = 0;
+            return null;
         }
-
+        
         return keySig;
       }
 
@@ -367,7 +411,6 @@ MuseScore {
       // Returns the diesis offset if a prior microtonal accidental exists
       // before or at the given tick value.
       // Null if there are no explicit microtonal accidentals
-      // WARNING: DON'T USE !getAccidental() to check for Null because !0 IS TRUE!
       function getAccidental(noteLine, tick, parms) {
         // Tick of the most recent measure just before current tick
         var mostRecentBar = 0;
@@ -394,7 +437,7 @@ MuseScore {
           // 2. They are before or at the current note's tick
           // 3. It is the most recent accidental that fulfills 1. and 2.
           if (acc.tick >= mostRecentBar && acc.tick <= tick && acc.tick > oldTick) {
-            console.log('note line: ' + noteLine + ', diesis: ' + acc.offset + ', tick: ' + acc.tick);
+            console.log('note line: ' + noteLine + ', steps: ' + acc.offset + ', tick: ' + acc.tick);
             console.log('acc.tick: ' + acc.tick + ', mostRecentBar: ' + mostRecentBar + ', tick: ' + tick + ', oldTick: ' + oldTick);
             offset = acc.offset;
             oldTick = acc.tick;
@@ -415,101 +458,93 @@ MuseScore {
         // However, if tpc is natural, it needs to be checked against acc and
         // the key signature to truly determine what note it is.
 
-        /*
-          ^   #v   v   b^       -> 1 diesis
-          #        b            -> 2 diesis
-          #^       bv           -> 3 diesis
-          #+       db           -> 4 diesis
-          x        bb           -> 5 diesis
-        */
-
         switch(tpc) {
         case -1: //Fbb
-          note.tuning = centOffsets['f'][-5]
+          note.tuning = centOffsets['f'][-8];
           return;
         case 0: //Cbb
-          note.tuning = centOffsets['c'][-5]
+          note.tuning = centOffsets['c'][-8];
           return;
         case 1: //Gbb
-          note.tuning = centOffsets['g'][-5]
+          note.tuning = centOffsets['g'][-8];
           return;
         case 2: //Dbb
-          note.tuning = centOffsets['d'][-5]
+          note.tuning = centOffsets['d'][-8];
           return;
         case 3: //Abb
-          note.tuning = centOffsets['a'][-5]
+          note.tuning = centOffsets['a'][-8];
           return;
         case 4: //Ebb
-          note.tuning = centOffsets['e'][-5]
+          note.tuning = centOffsets['e'][-8];
           return;
         case 5: //Bbb
-          note.tuning = centOffsets['b'][-5]
+          note.tuning = centOffsets['b'][-8];
           return;
 
         case 6: //Fb
-          note.tuning = centOffsets['f'][-2]
+          note.tuning = centOffsets['f'][-4];
           return;
         case 7: //Cb
-          note.tuning = centOffsets['c'][-2]
+          note.tuning = centOffsets['c'][-4];
           return;
         case 8: //Gb
-          note.tuning = centOffsets['g'][-2]
+          note.tuning = centOffsets['g'][-4];
           return;
         case 9: //Db
-          note.tuning = centOffsets['d'][-2]
+          note.tuning = centOffsets['d'][-4];
           return;
         case 10: //Ab
-          note.tuning = centOffsets['a'][-2]
+          note.tuning = centOffsets['a'][-4];
           return;
         case 11: //Eb
-          note.tuning = centOffsets['e'][-2]
+          note.tuning = centOffsets['e'][-4];
           return;
         case 12: //Bb
-          note.tuning = centOffsets['b'][-2]
+          note.tuning = centOffsets['b'][-4];
           return;
 
         case 20: //F#
-          note.tuning = centOffsets['f'][2]
+          note.tuning = centOffsets['f'][4];
           return;
         case 21: //C#
-          note.tuning = centOffsets['c'][2]
+          note.tuning = centOffsets['c'][4];
           return;
         case 22: //G#
-          note.tuning = centOffsets['g'][2]
+          note.tuning = centOffsets['g'][4];
           return;
         case 23: //D#
-          note.tuning = centOffsets['d'][2]
+          note.tuning = centOffsets['d'][4];
           return;
         case 24: //A#
-          note.tuning = centOffsets['a'][2]
+          note.tuning = centOffsets['a'][4];
           return;
         case 25: //E#
-          note.tuning = centOffsets['e'][2]
+          note.tuning = centOffsets['e'][4];
           return;
         case 26: //B#
-          note.tuning = centOffsets['b'][2]
+          note.tuning = centOffsets['b'][4];
           return;
 
         case 27: //Fx
-          note.tuning = centOffsets['f'][5]
+          note.tuning = centOffsets['f'][8];
           return;
         case 28: //Cx
-          note.tuning = centOffsets['c'][5]
+          note.tuning = centOffsets['c'][8];
           return;
         case 29: //Gx
-          note.tuning = centOffsets['g'][5]
+          note.tuning = centOffsets['g'][8];
           return;
         case 30: //Dx
-          note.tuning = centOffsets['d'][5]
+          note.tuning = centOffsets['d'][8];
           return;
         case 31: //Ax
-          note.tuning = centOffsets['a'][5]
+          note.tuning = centOffsets['a'][8];
           return;
         case 32: //Ex
-          note.tuning = centOffsets['e'][5]
+          note.tuning = centOffsets['e'][8];
           return;
         case 33: //Bx
-          note.tuning = centOffsets['b'][5]
+          note.tuning = centOffsets['b'][8];
           return;
         }
 
@@ -545,29 +580,43 @@ MuseScore {
         //NOTE: Only special accidentals need to be remembered.
         if (note.accidental) {
           var accOffset = null;
-          console.log('Note: ' + baseNote + ', Line: ' + note.line +
-                      ', Special Accidental: ' + note.accidentalType);
-          if (note.accidentalType == Accidental.MIRRORED_FLAT2)
-            accOffset = -4;
-          else if (note.accidentalType == Accidental.FLAT_ARROW_DOWN)
-            accOffset = -3;
-          else if (note.accidentalType == Accidental.NATURAL_ARROW_DOWN ||
-                   note.accidentalType == Accidental.FLAT_ARROW_UP)
-            accOffset = -1;
-          else if (note.accidentalType == Accidental.NATURAL)
+          console.log('Note: ' + baseNote + ', Line: ' + note.line + ', Special Accidental: ' + note.accidental);
+          if (note.accidentalType == Accidental.NATURAL)
             accOffset = 0;
-          else if (note.accidentalType == Accidental.NATURAL_ARROW_UP ||
-                   note.accidentalType == Accidental.SHARP_ARROW_DOWN)
+          else if (note.accidentalType == Accidental.NATURAL_ARROW_DOWN)
+            accOffset = -1;
+          else if (note.accidentalType == Accidental.NATURAL_ARROW_UP)
             accOffset = 1;
-          else if (note.accidentalType == Accidental.SHARP_ARROW_UP)
+          else if (note.accidentalType == Accidental.MIRRORED_FLAT)
+            accOffset = -2;
+          else if (note.accidentalType == Accidental.SHARP_SLASH)
+            accOffset = 2;
+          else if (note.accidentalType == Accidental.FLAT_ARROW_UP)
+            accOffset = -3;
+          else if (note.accidentalType == Accidental.SHARP_ARROW_DOWN)
             accOffset = 3;
+          else if (note.accidentalType == Accidental.FLAT_ARROW_DOWN)
+            accOffset = -5;
+          else if (note.accidentalType == Accidental.SHARP_ARROW_UP)
+            accOffset = 5;
+          else if (note.accidentalType == Accidental.MIRRORED_FLAT2)
+            accOffset = -6;
           else if (note.accidentalType == Accidental.SHARP_SLASH4)
-            accOffset = 4;
+            accOffset = 6;
+          //else if (note.accidentalType == Accidental.FLAT2_ARROW_UP)
+          //  accOffset = -7;
+          //else if (note.accidentalType == Accidental.SHARP2_ARROW_DOWN)
+          //  accOffset = 7;
+          //else if (note.accidentalType == Accidental.FLAT2_ARROW_DOWN)
+          //  accOffset = -9;
+          //else if (note.accidentalType == Accidental.SHARP2_ARROW_UP)
+          //  accOffset = 9;
 
           if (accOffset !== null) {
             registerAccidental(note.line, segment.tick, accOffset, parms);
           }
         }
+
         // Check for prev accidentals first, will be null if not present
         var stepsFromBaseNote = getAccidental(note.line, segment.tick, parms);
         if (stepsFromBaseNote === null) {
@@ -575,13 +624,13 @@ MuseScore {
           stepsFromBaseNote = parms.currKeySig[baseNote];
         }
 
-        console.log("Base Note: " + baseNote + ", diesis: " + stepsFromBaseNote);
+        console.log("Base Note: " + baseNote + ", steps: " + stepsFromBaseNote);
         note.tuning = centOffsets[baseNote][stepsFromBaseNote];
         return;
       }
 
       onRun: {
-        console.log("hello 31tet");
+        console.log("hello 27tet");
 
         if (typeof curScore === 'undefined')
               Qt.quit();
@@ -597,12 +646,12 @@ MuseScore {
           THIS SHOULD BE READONLY!
         */
         parms.keySig = {
-          'c': 0,
-          'd': 0,
-          'e': 0,
           'f': 0,
+          'c': 0,
           'g': 0,
+          'd': 0,
           'a': 0,
+          'e': 0,
           'b': 0
         };
 
