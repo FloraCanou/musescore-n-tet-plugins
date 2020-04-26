@@ -1,90 +1,85 @@
-# 31/22 EDO Retuner plugin for Musescore 2 / 3
+# 27, 34, 41 Edo Retuner Plugin for Musescore 2 / 3
 
-Musescore plugin to automatically retune notes in [31-EDO](https://en.wikipedia.org/wiki/31_equal_temperament)
-and [22-edo](https://en.wikipedia.org/wiki/22_equal_temperament)
+Musescore plugin to automatically retune notes in following edos: 
+
+27-edo, 
+[34-edo](https://en.wikipedia.org/wiki/34_equal_temperament) (also 17-edo), 
+[41-edo](https://en.wikipedia.org/wiki/41_equal_temperament), 
+and (as a bonus) [19-edo](https://en.wikipedia.org/wiki/19_equal_temperament). 
 
 ## Usage
 
 Download the QML files and put them in the plugins folder.
 
-To retune the entire score as is, run the plugin located in Plugins > 31-TET / 22-TET.
+To retune the entire score as is, run the plugin located in Plugins > Notes > Retune 27/34/41-TET.
 
 To only retune selected notes, make a selection before running the plugin.
 
 --------
 
-### Accidentals (31 edo)
+### Accidentals (27/34/41 edo)
 
-#### Ups and Downs notation (diatonic enharmonic equivalent)
-
-> Plugin file:
-> https://github.com/euwbah/musescore-n-tet-plugins/blob/master/31-TET.qml
-
-In ups and downs notation mode, these are the accidentals used by the
-plugin. They can be found in the [advanced palette](https://musescore.org/en/handbook/palettes-and-workspaces#workspaces).
-
-| Diesis steps | Accidental |
-| ---: | :-----:|
-| -5  | ![Double flat](images/bb.png) |
-| -4  | ![Sesqui flat](images/db.png)  |
-| -3  | ![Flat down](images/bd.png)  |
-| -2  | ![Flat](images/b.png)  |
-| -1  | ![Down](images/d.png) or ![Flat up](images/bu.png) |
-| 0   | ![Natural](images/n.png) |
-| +1  | ![Up](images/u.png) or ![Sharp down](images/sd.png) |
-| +2  | ![Sharp](images/s.png)  |
-| +3  | ![Sharp up](images/su.png) |
-| +4  | ![Sesqui sharp](images/ss.png)  |
-| +5  | ![Double sharp](images/x.png)  |
-
-> Important: This notation differs from the more conventional meantone notation
-> which uses quarter-tone accidentals instead.
->
-> The benefits of using this notation over meantone is that it allows for proper
-> spelling of notes and chords in all 31 keys as it still supports enharmonic diatonic-tone equivalents
-> by means of the double flat and double sharp accidentals.
-
-#### 1/4-comma meantone approximation (quarter-tone accidentals)
+#### Ups and Downs Notation
 
 > Plugin file:
-> https://github.com/euwbah/musescore-n-tet-plugins/blob/master/31-TET-Meantone.qml
+> https://github.com/floracanou/musescore-n-tet-plugins/blob/master/41-TET.qml
+> https://github.com/floracanou/musescore-n-tet-plugins/blob/master/34-TET.qml
+> https://github.com/floracanou/musescore-n-tet-plugins/blob/master/27-TET.qml
 
-When using the meantone version of the plugin, these are the accidentals used by the plugin.
+All these edos follow a fairly simple logic: one sharp/flat represents 4 steps. 
 
-| Diesis steps | Accidental |
+| Edo | Steps between D-E-F-G-A-B-C-D |
+| 27 | 5155515 |
+| 34 | 6266626 |
+| 41 | 7377737 |
+
+These are the accidentals used by the plugin. 
+They can be found in the [advanced palette](https://musescore.org/en/handbook/palettes-and-workspaces#workspaces).
+
+| Steps | Accidental |
 | ---: | :-----:|
-| -4  | ![Double flat](images/bb.png) |
-| -3  | ![Sesqui flat](images/db.png)  |
-| -2  | ![Flat](images/b.png)  |
-| -1  | ![Down](images/d-quarter.png) |
-| 0   | ![Natural](images/n.png) |
-| +1  | ![Up](images/+.png) |
-| +2  | ![Sharp](images/s.png)  |
-| +3  | ![Sesqui sharp](images/ss.png)  |
-| +4  | ![Double sharp](images/x.png)  |
-
-### Accidentals (22 edo)
-
-#### Superpyth Ups and Downs
-
-> Plugin file:
-> https://github.com/euwbah/musescore-n-tet-plugins/blob/master/22-TET.qml
-
-Natural notes in this system are based off the chain of fifths F-C-G-D-A-E-B.
-Each fifth is 13 steps of 22 edo (about 709 cents).
-The distance between B-C and E-F is 1 step of 22 edo (about 54.5 cents)
-
-| Diesis steps | Accidental |
-| ---: | :-----:|
-| -4  | ![Flat down](images/bd.png) (double flats are also -4 for simplicity's sake)  |
-| -3  | ![Flat](images/b.png)  |
-| -2  | ![Flat up](images/bu.png)  |
-| -1  | ![Down](images/d.png) |
+| -9  | ![Double flat down](images/bbv.png) |
+| -8  | ![Double flat](images/bb.png) |
+| -7  | ![Double flat up](images/bbu.png) |
+| -6  | ![Sesquiflat](images/db.png) |
+| -5  | ![Flat down](images/bv.png) |
+| -4  | ![Flat](images/b.png) |
+| -3  | ![Flat up](images/bu.png) |
+| -2  | ![Semiflat](images/d.png) |
+| -1  | ![Down](images/v.png) |
 | 0   | ![Natural](images/n.png) |
 | +1  | ![Up](images/u.png) |
-| +2  | ![Sharp down](images/sd.png)  |
-| +3  | ![Sharp](images/s.png) |
-| +4  | ![Sharp up](images/su.png) (double sharps are also +4 for simplicity's sake) |
+| +2  | ![Semisharp](images/+.png) |
+| +3  | ![Sharp down](images/sv.png) |
+| +4  | ![Sharp](images/s.png) |
+| +5  | ![Sharp up](images/su.png) |
+| +6  | ![Sesquisharp](images/s+.png) |
+| +7  | ![Double sharp down](images/xv.png) |
+| +8  | ![Double sharp](images/x.png) |
+| +9  | ![Double sharp up](images/xu.png) |
+
+**Important**: I've commented out +-9 in 34-edo, and +-9 and +-7 in 27-edo
+because they exceed the 300-cent limit of display, 
+and you should probably never need them. 
+
+### Accidentals (19 edo)
+
+#### Meantone notation
+
+> Plugin file:
+> https://github.com/euwbah/musescore-n-tet-plugins/blob/master/19-TET-Simple.qml
+
+A very simple one. It doesn't even use custom accidentals. 
+
+These are the accidentals used by the plugin.
+
+| Steps | Accidental |
+| ---: | :-----:|
+| -2  | ![Double flat](images/bb.png) |
+| -1  | ![Flat](images/b.png) |
+| 0   | ![Natural](images/n.png) |
+| +1  | ![Sharp](images/s.png) |
+| +2  | ![Double sharp](images/x.png) |
 
 ### Custom key signatures
 
@@ -104,9 +99,11 @@ system/staff text containing accidental code:
 
 | Accidental | Textual representation |
 | ----: | :----: |
-| ![Flat down](images/bb.png) | `bb` |
-| ![Sesqui flat](images/db.png) | `db`  |
-| ![Flat down](images/bd.png) | `bv`  |
+| ![Doubleflat down](images/bbv.png) | `bbv` |
+| ![Doubleflat](images/bb.png) | `bb` |
+| ![Doubleflat up](images/bbu.png) | `bb^` |
+| ![Sesquiflat](images/db.png) | `db` or `bd`  |
+| ![Flat down](images/bv.png) | `bv`  |
 | ![Flat](images/b.png)   | `b`  |
 | ![Flat up](images/bu.png)   | `b^` |
 | ![Down](images/d.png)   | `v` |
@@ -115,8 +112,10 @@ system/staff text containing accidental code:
 | ![Sharp down](images/sd.png) | `#v` |
 | ![Sharp](images/s.png) | `#`  |
 | ![Sharp up](images/su.png) | `#^`  |
-| ![Sesqui sharp](images/ss.png) | `#+`  |
-| ![Double sharp](images/x.png) | `x`  |
+| ![Sesquisharp](images/ss.png) | `#+` or `+#`  |
+| ![Doublesharp down](images/xv.png) | `xv`  |
+| ![Doublesharp](images/x.png) | `x`  |
+| ![Doublesharp up](images/xu.png) | `x+`  |
 
 ![Staff text custom key sig](images/2018/06/staff-text-custom-key-sig.png)
 
@@ -129,13 +128,15 @@ System Text or Staff Text.
   This is especially useful when using custom **local** key signatures!
 - Remember to make the custom key signature code invisible! (Press `V` to toggle visibility)
 
-Key signature code syntax:
+Key signature code syntax
+
+**This is different from the original** because I reckon it more intuitive to do in fifths.
 
 1. Start with a dot `.`
-2. Put the textual representation of the accidental for the note **C** using the [accidental code](#accidental-code)
+2. Put the textual representation of the accidental for the note **F** using the [accidental code](#accidental-code)
 3. Put another dot `.`
-4. Put the required accidental for **D**
-5. Repeat from **C** thru **B**
+4. Put the required accidental for **C**
+5. Repeat from **F** thru **B** 
 
 Note that There **must** be seven `.` in total,
 natural accidentals are denoted by leaving the space blank, or using any other character
@@ -144,8 +145,11 @@ that does not represent an accidental.
 Spaces/newlines can be placed before or after the dots to improve readability.
 
 **For example:**
-Ab-down major in ups-and-downs mode can be denoted like this: `.v.bv.bv.v.v.bv.bv`
-representing the key signature of Cv, Dbv, Ebv, Fv, Gv, Abv, Bbv.
+Ab-down major in ups-and-downs mode can be denoted like this: `.#v.#v.#v.v.v.v.v`
+representing the key signature of F#v, C#v, G#v, D#v, Av, Ev, Bv.
+
+For a meantone-ish sound, this: `.#v.#v.#v.v.d.d.d`
+representing the key signature of F#v, C#v, G#v, D#v, Ad, Ed, Bd.
 
 **IMPORTANT!** Following a custom key signature, should there be a modulation to any standard
 key signature, it is still necessary to reset the custom key signature to the default, that is,
@@ -169,13 +173,7 @@ overridden. Regular and custom key signatures are not compatible with each other
 
 ## TODO:
 
-- Handle cross-staff notation (ctrl + shift + up/down in connected staves, e.g. grand staff) where note appears to be in another staff
-  other than the cursor's staffIdx. Currently, accidentals in the cross-staff do not work on the notes that came from another staff.
-  See Add Courtesy Accidentals plugin for how to do this
-- Implement porcupine notation for 22-edo (D-E-F-G-A-B-C-D = sssLsss)
-- Implement +/- 1 step transposition
-- Implement toggling between enharmonic equivalences
-- Don't hard-code frequencies, just use a dictionary of exponential operations instead
+- Let's follow the upstream. 
 
 ## [Changelog](./CHANGELOG.md)
 
