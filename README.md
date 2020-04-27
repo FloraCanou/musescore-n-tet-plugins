@@ -7,6 +7,13 @@ Musescore plugin to automatically retune notes in following edos:
 [41-edo](https://en.wikipedia.org/wiki/41_equal_temperament), 
 and (as a bonus) [19-edo](https://en.wikipedia.org/wiki/19_equal_temperament). 
 
+**Important: what's different from the original**
+
+1. D-centered tuning, for the least net offset; 
+2. Fifth-based key signatures, since I reckon it more intuitive. 
+
+If you prefer the original A-centered tuning and tone-based key signatures, you're free to fork it and do it yourself. 
+
 ## Usage
 
 Download the QML files and put them in the plugins folder.
@@ -104,15 +111,13 @@ declared custom key signature, behaving exactly the same way a key signature wou
 You can indicate custom key signatures by entering the key signature using
 System Text or Staff Text.
 
-- Use *System Text* (`Ctrl` + `Shift` + `T`) if you want the key signature code to affect
+- Use **System Text** (`Ctrl` + `Shift` + `T`) if you want the key signature code to affect
   all staves from there onwards
-- Use *Staff Text* (`Shift` + `T`) if you only want the code to affect the staff that it is on.
-  This is especially useful when using custom *local* key signatures!
+- Use **Staff Text** (`Shift` + `T`) if you only want the code to affect the staff that it is on.
+  This is especially useful when using custom **local** key signatures!
 - Remember to make the custom key signature code invisible! (Press `V` to toggle visibility)
 
-#### Key signature code syntax
-
-**This is different from the original** because I reckon it more intuitive to do in fifths.
+Key signature code syntax:
 
 1. Start with a dot `.`
 2. Put the textual representation of the accidental for the note **F** using the [accidental code](#accidental-code)
@@ -120,13 +125,13 @@ System Text or Staff Text.
 4. Put the required accidental for **C**
 5. Repeat from **F** thru **B** 
 
-Note that There *must* be seven `.` in total,
+Note that There **must** be seven `.` in total,
 natural accidentals are denoted by leaving the space blank, or using any other character
 that does not represent an accidental.
 
 Spaces/newlines can be placed before or after the dots to improve readability.
 
-For example:
+**For example:**
 Ab-down major in ups-and-downs mode can be denoted like this: `.#v.#v.#v.v.v.v.v`
 representing the key signature of F#v, C#v, G#v, D#v, Av, Ev, Bv.
 
