@@ -66,7 +66,7 @@ and you should probably never need them.
 #### Meantone notation
 
 > Plugin file: \
-> https://github.com/euwbah/musescore-n-tet-plugins/blob/master/19-TET-Simple.qml
+> https://github.com/floracanou/musescore-n-tet-plugins/blob/master/19-TET-Simple.qml
 
 A very simple one. It doesn't even use custom accidentals. 
 
