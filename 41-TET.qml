@@ -4,209 +4,182 @@ import QtQuick.Controls.Styles 1.3
 import MuseScore 3.0
 
 MuseScore {
-      version:  "1.3.5"
-      description: "Retune selection to 41-TET, or whole score if nothing selected."
-      menuPath: "Plugins.Notes.Retune 41-TET"
+      property var n: 41
+      version: "2.0.0"
+      description: "Retune selection to " + n + "-TET, or whole score if nothing selected."
+      menuPath: "Plugins.Notes.Retune " + n + "-TET"
 
       // WARNING! This doesn't validate the accidental code!
       property variant customKeySigRegex: /\.(.*)\.(.*)\.(.*)\.(.*)\.(.*)\.(.*)\.(.*)/g
-      property var stepSize: 1200.0/41
-      property variant centOffsets: {
-        'a': {
-          '-9': stepSize * -26 + 500,        //Abbv
-          '-8': stepSize * -25 + 500 + 200,  //Abb
-          '-7': stepSize * -24 + 500,        //Abb^
-          '-6': stepSize * -23 + 500,        //Adb
-          '-5': stepSize * -22 + 500,        //Abv
-          '-4': stepSize * -21 + 500 + 100,  //Ab
-          '-3': stepSize * -20 + 500,        //Ab^
-          '-2': stepSize * -19 + 500,        //Ad
-          '-1': stepSize * -18 + 500,        //Av
-           0: stepSize * -17 + 500,          //A
-           1: stepSize * -16 + 500,          //A^
-           2: stepSize * -15 + 500,          //A+
-           3: stepSize * -14 + 500,          //A#v
-           4: stepSize * -13 + 500 - 100,    //A#
-           5: stepSize * -12 + 500,           //A#^
-           6: stepSize * -11 + 500,           //A+#
-           7: stepSize * -10 + 500,           //Axv
-           8: stepSize * -9 + 500 - 200,     //Ax
-           9: stepSize * -8 + 500,           //Ax^
-        },
-        'b': {
-          '-9': stepSize * -19 + 300,
-          '-8': stepSize * -18 + 300 + 200,
-          '-7': stepSize * -17 + 300,
-          '-6': stepSize * -16 + 300,
-          '-5': stepSize * -15 + 300,
-          '-4': stepSize * -14 + 300 + 100,
-          '-3': stepSize * -13 + 300,
-          '-2': stepSize * -12 + 300,
-          '-1': stepSize * -11 + 300,
-           0: stepSize * -10 + 300,
-           1: stepSize * -9 + 300,
-           2: stepSize * -8 + 300,
-           3: stepSize * -7 + 300,
-           4: stepSize * -6 + 300 - 100,
-           5: stepSize * -5 + 300,
-           6: stepSize * -4 + 300,
-           7: stepSize * -3 + 300,
-           8: stepSize * -2 + 300 - 200,
-           9: stepSize * -1 + 300,
-        },
-        'c': {
-          '-9': stepSize * -16 + 200,
-          '-8': stepSize * -15 + 200 + 200,
-          '-7': stepSize * -14 + 200,
-          '-6': stepSize * -13 + 200,
-          '-5': stepSize * -12 + 200,
-          '-4': stepSize * -11 + 200 + 100,
-          '-3': stepSize * -10 + 200,
-          '-2': stepSize * -9 + 200,
-          '-1': stepSize * -8 + 200,
-           0: stepSize * -7 + 200,
-           1: stepSize * -6 + 200,
-           2: stepSize * -5 + 200,
-           3: stepSize * -4 + 200,
-           4: stepSize * -3 + 200 - 100,
-           5: stepSize * -2 + 200,
-           6: stepSize * -1 + 200,
-           7: stepSize * 0 + 200,
-           8: stepSize * 1 + 200 - 200,
-           9: stepSize * 2 + 200,
-        },
-        'd': {
-          '-9': stepSize * -9,
-          '-8': stepSize * -8 + 200,
-          '-7': stepSize * -7,
-          '-6': stepSize * -6,
-          '-5': stepSize * -5,
-          '-4': stepSize * -4 + 100,
-          '-3': stepSize * -3,
-          '-2': stepSize * -2,
-          '-1': stepSize * -1,
-           0: 0,
-           1: stepSize * 1,
-           2: stepSize * 2,
-           3: stepSize * 3,
-           4: stepSize * 4 - 100,
-           5: stepSize * 5,
-           6: stepSize * 6,
-           7: stepSize * 7,
-           8: stepSize * 8 - 200,
-           9: stepSize * 9,
-        },
-        'e': {
-          '-9': stepSize * -2 - 200,
-          '-8': stepSize * -1 - 200 + 200,
-          '-7': stepSize * 0 - 200,
-          '-6': stepSize * 1 - 200,
-          '-5': stepSize * 2 - 200,
-          '-4': stepSize * 3 - 200 + 100,
-          '-3': stepSize * 4 - 200,
-          '-2': stepSize * 5 - 200,
-          '-1': stepSize * 6 - 200,
-           0: stepSize * 7 - 200,
-           1: stepSize * 8 - 200,
-           2: stepSize * 9 - 200,
-           3: stepSize * 10 - 200,
-           4: stepSize * 11 - 200 - 100,
-           5: stepSize * 12 - 200,
-           6: stepSize * 13 - 200,
-           7: stepSize * 14 - 200,
-           8: stepSize * 15 - 200 - 200,
-           9: stepSize * 16 - 200,
-        },
-        'f': {
-          '-9': stepSize * 1 - 300,
-          '-8': stepSize * 2 - 300 + 200,
-          '-7': stepSize * 3 - 300,
-          '-6': stepSize * 4 - 300,
-          '-5': stepSize * 5 - 300,
-          '-4': stepSize * 6 - 300 + 100,
-          '-3': stepSize * 7 - 300,
-          '-2': stepSize * 8 - 300,
-          '-1': stepSize * 9 - 300,
-           0: stepSize * 10 - 300,
-           1: stepSize * 11 - 300,
-           2: stepSize * 12 - 300,
-           3: stepSize * 13 - 300,
-           4: stepSize * 14 - 300 - 100,
-           5: stepSize * 15 - 300,
-           6: stepSize * 16 - 300,
-           7: stepSize * 17 - 300,
-           8: stepSize * 18 - 300 - 200,
-           9: stepSize * 19 - 300,
-        },
-        'g': {
-          '-9': stepSize * 8 - 500,
-          '-8': stepSize * 9 - 500 + 200,
-          '-7': stepSize * 10 - 500,
-          '-6': stepSize * 11 - 500,
-          '-5': stepSize * 12 - 500,
-          '-4': stepSize * 13 - 500 + 100,
-          '-3': stepSize * 14 - 500,
-          '-2': stepSize * 15 - 500,
-          '-1': stepSize * 16 - 500,
-           0: stepSize * 17 - 500,
-           1: stepSize * 18 - 500,
-           2: stepSize * 19 - 500,
-           3: stepSize * 20 - 500,
-           4: stepSize * 21 - 500 - 100,
-           5: stepSize * 22 - 500,
-           6: stepSize * 23 - 500,
-           7: stepSize * 24 - 500,
-           8: stepSize * 25 - 500 - 200,
-           9: stepSize * 26 - 500,
+      property int fifthStep: Math.round (n*(Math.log (3.0)/Math.log (2.0) - 1.0))
+      property int sharpValue: 7*fifthStep - 4*n
+      property var stepSize: 1200.0/n
+      function getCentOffset(noteName, stepOffset) {
+        var regularAccCentOffset = 0;
+        for (var x = -2; x <= 2; x++) {
+          if (stepOffset == x*sharpValue)
+            regularAccCentOffset += 100*x;
+        }
+        switch (noteName) {
+          case 'f':
+            return stepSize*(-3*fifthStep + stepOffset) + 2100 - regularAccCentOffset;
+          case 'c':
+            return stepSize*(-2*fifthStep + stepOffset) + 1400 - regularAccCentOffset;
+          case 'g':
+            return stepSize*(-fifthStep + stepOffset) + 700 - regularAccCentOffset;
+          case 'd':
+            return stepSize*stepOffset - regularAccCentOffset;
+          case 'a':
+            return stepSize*(fifthStep + stepOffset) - 700 - regularAccCentOffset;
+          case 'e':
+            return stepSize*(2*fifthStep + stepOffset) - 1400 - regularAccCentOffset;
+          case 'b':
+            return stepSize*(3*fifthStep + stepOffset) - 2100 - regularAccCentOffset;
         }
       }
 
       function convertAccidentalToStepsOrNull(acc) {
-        switch(acc.trim()) {
-        case 'bbv':
-          return -9;
-        case 'bb':
-          return -8;
-        case 'bb^':
-          return -7;
-        case 'db':
-          return -6;
-        case 'bd':
-          return -6;
-        case 'bv':
-          return -5;
-        case 'b':
-          return -4;
-        case 'b^':
-          return -3;
-        case 'd':
-          return -2;
-        case 'v':
-          return -1;
-        case '':
-          return 0;
-        case '^':
-          return 1;
-        case '+':
-          return 2;
-        case '#v':
-          return 3;
-        case '#':
-          return 4;
-        case '#^':
-          return 5;
-        case '#+':
-          return 6;
-        case '+#':
-          return 6;
-        case 'xv':
-          return 7;
-        case 'x':
-          return 8;
-        case 'x^':
-          return 9;
-        default:
-          return null;
+        if (sharpValue <= 4) {
+          switch(acc.trim()) {
+          case 'db':
+          case 'bd':
+            return -3*sharpValue/2;
+          case 'd':
+            return -sharpValue/2;
+          case '+':
+            return sharpValue/2;
+          case '#+':
+          case '+#':
+            return 3*sharpValue/2;
+          case 'bbv':
+            return -2*sharpValue - 1;
+          case 'bb':
+            return -2*sharpValue;
+          case 'bb^':
+            return -2*sharpValue + 1;
+          case 'bv':
+            return -sharpValue - 1;
+          case 'b':
+            return -sharpValue;
+          case 'b^':
+            return -sharpValue + 1;
+          case 'v':
+            return -1;
+          case '':
+            return 0;
+          case '^':
+            return 1;
+          case '#v':
+            return sharpValue - 1;
+          case '#':
+            return sharpValue;
+          case '#^':
+            return sharpValue + 1;
+          case 'xv':
+            return 2*sharpValue - 1;
+          case 'x':
+            return 2*sharpValue;
+          case 'x^':
+            return 2*sharpValue + 1;
+          default:
+            return null;
+          }
+        }
+        else {
+          switch(acc.trim()) {
+          case 'db':
+          case 'bd':
+            return -3*sharpValue/2;
+          case 'd':
+            return -sharpValue/2;
+          case '+':
+            return sharpValue/2;
+          case '#+':
+          case '+#':
+            return 3*sharpValue/2;
+          case 'bbv3':
+            return -2*sharpValue - 3;
+          case 'bbv2':
+            return -2*sharpValue - 2;
+          case 'bbv1':
+          case 'bbv':
+            return -2*sharpValue - 1;
+          case 'bb':
+            return -2*sharpValue;
+          case 'bb^':
+          case 'bb^1':
+            return -2*sharpValue + 1;
+          case 'bb^2':
+            return -2*sharpValue + 2;
+          case 'bb^3':
+            return -2*sharpValue + 3;
+          case 'bv3':
+            return -sharpValue - 3;
+          case 'bv2':
+            return -sharpValue - 2;
+          case 'bv1':
+          case 'bv':
+            return -sharpValue - 1;
+          case 'b':
+            return -sharpValue;
+          case 'b^':
+          case 'b^1':
+            return -sharpValue + 1;
+          case 'b^2':
+            return -sharpValue + 2;
+          case 'b^3':
+            return -sharpValue + 3;
+          case 'v3':
+            return -3;
+          case 'v2':
+            return -2;
+          case 'v1':
+          case 'v':
+            return -1;
+          case '':
+            return 0;
+          case '^':
+          case '^1':
+            return 1;
+          case '^2':
+            return 2;
+          case '^3':
+            return 3;
+          case '#v3':
+            return sharpValue - 3;
+          case '#v2':
+            return sharpValue - 2;
+          case '#v1':
+          case '#v':
+            return sharpValue - 1;
+          case '#':
+            return sharpValue;
+          case '#^':
+          case '#^1':
+            return sharpValue + 1;
+          case '#^2':
+            return sharpValue + 2;
+          case '#^3':
+            return sharpValue + 3;
+          case 'xv3':
+            return 2*sharpValue - 3;
+          case 'xv2':
+            return 2*sharpValue - 2;
+          case 'xv1':
+          case 'xv':
+            return 2*sharpValue - 1;
+          case 'x':
+            return 2*sharpValue;
+          case 'x^':
+          case 'x^1':
+            return 2*sharpValue + 1;
+          case 'x^2':
+            return 2*sharpValue + 2;
+          case 'x^3':
+            return 2*sharpValue + 3;
+          default:
+            return null;
+          }
         }
       }
 
@@ -218,7 +191,7 @@ MuseScore {
       // where identifiers f thru b denote a valid accidental code of which
       // will apply to the respective notes.
       //
-      // For example, this is Fd major (that sounds like a meantone): .d.d.d.d.b^.b^.bb^
+      // For example, this is Fv major: .v.v.v.v.v.v.bv
       //
       // whitespace can be placed between dots and accidentals for readability.
       //
@@ -242,7 +215,7 @@ MuseScore {
           else
             return null;
         }
-        
+
         return keySig;
       }
 
@@ -397,18 +370,18 @@ MuseScore {
       // normal accidentals with TPCs.
       //
       // Remember to reset the parms.accidentals array after every bar & staff!
-      function registerAccidental(noteLine, tick, diesisOffset, parms) {
+      function registerAccidental(noteLine, tick, stepOffset, parms) {
         if (!parms.accidentals[noteLine]) {
           parms.accidentals[noteLine] = [];
         }
 
         parms.accidentals[noteLine].push({
           tick: tick,
-          offset: diesisOffset
+          offset: stepOffset
         });
       }
 
-      // Returns the diesis offset if a prior microtonal accidental exists
+      // Returns the step offset if a prior microtonal accidental exists
       // before or at the given tick value.
       // Null if there are no explicit microtonal accidentals
       function getAccidental(noteLine, tick, parms) {
@@ -460,91 +433,91 @@ MuseScore {
 
         switch(tpc) {
         case -1: //Fbb
-          note.tuning = centOffsets['f'][-8];
+          note.tuning = getCentOffset ('f', -2*sharpValue);
           return;
         case 0: //Cbb
-          note.tuning = centOffsets['c'][-8];
+          note.tuning = getCentOffset ('c', -2*sharpValue);
           return;
         case 1: //Gbb
-          note.tuning = centOffsets['g'][-8];
+          note.tuning = getCentOffset ('g', -2*sharpValue);
           return;
         case 2: //Dbb
-          note.tuning = centOffsets['d'][-8];
+          note.tuning = getCentOffset ('d', -2*sharpValue);
           return;
         case 3: //Abb
-          note.tuning = centOffsets['a'][-8];
+          note.tuning = getCentOffset ('a', -2*sharpValue);
           return;
         case 4: //Ebb
-          note.tuning = centOffsets['e'][-8];
+          note.tuning = getCentOffset ('e', -2*sharpValue);
           return;
         case 5: //Bbb
-          note.tuning = centOffsets['b'][-8];
+          note.tuning = getCentOffset ('b', -2*sharpValue);
           return;
 
         case 6: //Fb
-          note.tuning = centOffsets['f'][-4];
+          note.tuning = getCentOffset ('f', -sharpValue);
           return;
         case 7: //Cb
-          note.tuning = centOffsets['c'][-4];
+          note.tuning = getCentOffset ('c', -sharpValue);
           return;
         case 8: //Gb
-          note.tuning = centOffsets['g'][-4];
+          note.tuning = getCentOffset ('g', -sharpValue);
           return;
         case 9: //Db
-          note.tuning = centOffsets['d'][-4];
+          note.tuning = getCentOffset ('d', -sharpValue);
           return;
         case 10: //Ab
-          note.tuning = centOffsets['a'][-4];
+          note.tuning = getCentOffset ('a', -sharpValue);
           return;
         case 11: //Eb
-          note.tuning = centOffsets['e'][-4];
+          note.tuning = getCentOffset ('e', -sharpValue);
           return;
         case 12: //Bb
-          note.tuning = centOffsets['b'][-4];
+          note.tuning = getCentOffset ('b', -sharpValue);
           return;
 
         case 20: //F#
-          note.tuning = centOffsets['f'][4];
+          note.tuning = getCentOffset ('f', sharpValue);
           return;
         case 21: //C#
-          note.tuning = centOffsets['c'][4];
+          note.tuning = getCentOffset ('c', sharpValue);
           return;
         case 22: //G#
-          note.tuning = centOffsets['g'][4];
+          note.tuning = getCentOffset ('g', sharpValue);
           return;
         case 23: //D#
-          note.tuning = centOffsets['d'][4];
+          note.tuning = getCentOffset ('d', sharpValue);
           return;
         case 24: //A#
-          note.tuning = centOffsets['a'][4];
+          note.tuning = getCentOffset ('a', sharpValue);
           return;
         case 25: //E#
-          note.tuning = centOffsets['e'][4];
+          note.tuning = getCentOffset ('e', sharpValue);
           return;
         case 26: //B#
-          note.tuning = centOffsets['b'][4];
+          note.tuning = getCentOffset ('b', sharpValue);
           return;
 
         case 27: //Fx
-          note.tuning = centOffsets['f'][8];
+          note.tuning = getCentOffset ('f', 2*sharpValue);
           return;
         case 28: //Cx
-          note.tuning = centOffsets['c'][8];
+          note.tuning = getCentOffset ('c', 2*sharpValue);
           return;
         case 29: //Gx
-          note.tuning = centOffsets['g'][8];
+          note.tuning = getCentOffset ('g', 2*sharpValue);
           return;
         case 30: //Dx
-          note.tuning = centOffsets['d'][8];
+          note.tuning = getCentOffset ('d', 2*sharpValue);
           return;
         case 31: //Ax
-          note.tuning = centOffsets['a'][8];
+          note.tuning = getCentOffset ('a', 2*sharpValue);
           return;
         case 32: //Ex
-          note.tuning = centOffsets['e'][8];
+          note.tuning = getCentOffset ('e', 2*sharpValue);
           return;
         case 33: //Bx
-          note.tuning = centOffsets['b'][8];
+          note.tuning = getCentOffset ('b', 2*sharpValue);
           return;
         }
 
@@ -581,36 +554,100 @@ MuseScore {
         if (note.accidental) {
           var accOffset = null;
           console.log('Note: ' + baseNote + ', Line: ' + note.line + ', Special Accidental: ' + note.accidental);
-          if (note.accidentalType == Accidental.NATURAL)
-            accOffset = 0;
-          else if (note.accidentalType == Accidental.NATURAL_ARROW_DOWN)
-            accOffset = -1;
-          else if (note.accidentalType == Accidental.NATURAL_ARROW_UP)
-            accOffset = 1;
-          else if (note.accidentalType == Accidental.MIRRORED_FLAT)
-            accOffset = -2;
+          if (note.accidentalType == Accidental.SHARP_SLASH4)
+            accOffset = 3*sharpValue/2;
           else if (note.accidentalType == Accidental.SHARP_SLASH)
-            accOffset = 2;
-          else if (note.accidentalType == Accidental.FLAT_ARROW_UP)
-            accOffset = -3;
-          else if (note.accidentalType == Accidental.SHARP_ARROW_DOWN)
-            accOffset = 3;
-          else if (note.accidentalType == Accidental.FLAT_ARROW_DOWN)
-            accOffset = -5;
-          else if (note.accidentalType == Accidental.SHARP_ARROW_UP)
-            accOffset = 5;
+            accOffset = sharpValue/2;
+          else if (note.accidentalType == Accidental.NATURAL)
+            accOffset = 0;
+          else if (note.accidentalType == Accidental.MIRRORED_FLAT)
+            accOffset = -sharpValue/2;
           else if (note.accidentalType == Accidental.MIRRORED_FLAT2)
-            accOffset = -6;
-          else if (note.accidentalType == Accidental.SHARP_SLASH4)
-            accOffset = 6;
-          else if (note.accidentalType == Accidental.FLAT2_ARROW_UP)
-            accOffset = -7;
-          else if (note.accidentalType == Accidental.SHARP2_ARROW_DOWN)
-            accOffset = 7;
-          else if (note.accidentalType == Accidental.FLAT2_ARROW_DOWN)
-            accOffset = -9;
-          else if (note.accidentalType == Accidental.SHARP2_ARROW_UP)
-            accOffset = 9;
+            accOffset = -3*sharpValue/2;
+          else if (sharpValue <= 4) {
+            if (note.accidentalType == Accidental.SHARP2_ARROW_UP)
+              accOffset = 2*sharpValue + 1;
+            else if (note.accidentalType == Accidental.SHARP2_ARROW_DOWN)
+              accOffset = 2*sharpValue - 1;
+            else if (note.accidentalType == Accidental.SHARP_ARROW_UP)
+              accOffset = sharpValue + 1;
+            else if (note.accidentalType == Accidental.SHARP_ARROW_DOWN)
+              accOffset = sharpValue - 1;
+            else if (note.accidentalType == Accidental.NATURAL_ARROW_UP)
+              accOffset = 1;
+            else if (note.accidentalType == Accidental.NATURAL_ARROW_DOWN)
+              accOffset = -1;
+            else if (note.accidentalType == Accidental.FLAT_ARROW_UP)
+              accOffset = -sharpValue + 1;
+            else if (note.accidentalType == Accidental.FLAT_ARROW_DOWN)
+              accOffset = -sharpValue - 1;
+            else if (note.accidentalType == Accidental.FLAT2_ARROW_UP)
+              accOffset = -2*sharpValue + 1;
+            else if (note.accidentalType == Accidental.FLAT2_ARROW_DOWN)
+              accOffset = -2*sharpValue - 1;
+          }
+          else {
+            if (note.accidentalType == Accidental.SHARP2_THREE_ARROWS_UP)
+              accOffset = 2*sharpValue + 3;
+            else if (note.accidentalType == Accidental.SHARP2_TWO_ARROWS_UP)
+              accOffset = 2*sharpValue + 2;
+            else if (note.accidentalType == Accidental.SHARP2_ONE_ARROW_UP)
+              accOffset = 2*sharpValue + 1;
+            else if (note.accidentalType == Accidental.SHARP2_ONE_ARROW_DOWN)
+              accOffset = 2*sharpValue - 1;
+            else if (note.accidentalType == Accidental.SHARP2_TWO_ARROWS_DOWN)
+              accOffset = 2*sharpValue - 2;
+            else if (note.accidentalType == Accidental.SHARP2_THREE_ARROWS_DOWN)
+              accOffset = 2*sharpValue - 3;
+            else if (note.accidentalType == Accidental.SHARP_THREE_ARROWS_UP)
+              accOffset = sharpValue + 3;
+            else if (note.accidentalType == Accidental.SHARP_TWO_ARROWS_UP)
+              accOffset = sharpValue + 2;
+            else if (note.accidentalType == Accidental.SHARP_ONE_ARROW_UP)
+              accOffset = sharpValue + 1;
+            else if (note.accidentalType == Accidental.SHARP_ONE_ARROW_DOWN)
+              accOffset = sharpValue - 1;
+            else if (note.accidentalType == Accidental.SHARP_TWO_ARROWS_DOWN)
+              accOffset = sharpValue - 2;
+            else if (note.accidentalType == Accidental.SHARP_THREE_ARROWS_DOWN)
+              accOffset = sharpValue - 3;
+            else if (note.accidentalType == Accidental.NATURAL_THREE_ARROWS_UP)
+              accOffset = 3;
+            else if (note.accidentalType == Accidental.NATURAL_TWO_ARROWS_UP)
+              accOffset = 2;
+            else if (note.accidentalType == Accidental.NATURAL_ONE_ARROW_UP)
+              accOffset = 1;
+            else if (note.accidentalType == Accidental.NATURAL_ONE_ARROW_DOWN)
+              accOffset = -1;
+            else if (note.accidentalType == Accidental.NATURAL_TWO_ARROWS_DOWN)
+              accOffset = -2;
+            else if (note.accidentalType == Accidental.NATURAL_THREE_ARROWS_DOWN)
+              accOffset = -3;
+            else if (note.accidentalType == Accidental.FLAT_THREE_ARROWS_UP)
+              accOffset = -sharpValue + 3;
+            else if (note.accidentalType == Accidental.FLAT_TWO_ARROWS_UP)
+              accOffset = -sharpValue + 2;
+            else if (note.accidentalType == Accidental.FLAT_ONE_ARROW_UP)
+              accOffset = -sharpValue + 1;
+            else if (note.accidentalType == Accidental.FLAT_ONE_ARROW_DOWN)
+              accOffset = -sharpValue - 1;
+            else if (note.accidentalType == Accidental.FLAT_TWO_ARROWS_DOWN)
+              accOffset = -sharpValue - 2;
+            else if (note.accidentalType == Accidental.FLAT_THREE_ARROWS_DOWN)
+              accOffset = -sharpValue - 3;
+            else if (note.accidentalType == Accidental.FLAT2_THREE_ARROWS_UP)
+              accOffset = -2*sharpValue + 3;
+            else if (note.accidentalType == Accidental.FLAT2_TWO_ARROWS_UP)
+              accOffset = -2*sharpValue + 2;
+            else if (note.accidentalType == Accidental.FLAT2_ONE_ARROW_UP)
+              accOffset = -2*sharpValue + 1;
+            else if (note.accidentalType == Accidental.FLAT2_ONE_ARROW_DOWN)
+              accOffset = -2*sharpValue - 1;
+            else if (note.accidentalType == Accidental.FLAT2_TWO_ARROWS_DOWN)
+              accOffset = -2*sharpValue - 2;
+            else if (note.accidentalType == Accidental.FLAT2_THREE_ARROWS_DOWN)
+              accOffset = -2*sharpValue - 3;
+          }
 
           if (accOffset !== null) {
             registerAccidental(note.line, segment.tick, accOffset, parms);
@@ -625,12 +662,12 @@ MuseScore {
         }
 
         console.log("Base Note: " + baseNote + ", steps: " + stepsFromBaseNote);
-        note.tuning = centOffsets[baseNote][stepsFromBaseNote];
+        note.tuning = getCentOffset (baseNote, stepsFromBaseNote);
         return;
       }
 
       onRun: {
-        console.log("hello 41tet");
+        console.log("hello " + n + "-tet");
 
         if (typeof curScore === 'undefined')
               Qt.quit();
