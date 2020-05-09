@@ -4,15 +4,15 @@ Musescore plugin to automatically retune notes in any edo based on traditional h
 
 **The code is edo-agnostic!**
 Just change the number in line 7: 
-> property var n: 24
-
+`property var n: 24`
 to whatever edo you like and boom, you have it! 
 
 For the accidentals used in each edo, see [Alternative Symbols for Ups and Downs Notation](https://en.xen.wiki/w/Alternative_Symbols_for_Ups_and_Downs_Notation). 
-That's how you're supposed to use the plugin, but undocumented use are *not* forbidden.
+
+That's how you're supposed to use the plugin, but undocumented use are *not* forbidden. 
 
 Edos known to work well: 
-> 19, 22, 27, 29, 31, 34 (covering 17), 36, 41, 46, 48 (covering 24)
+> 10, 15, 16, 19, 22, 27, 29, 31, 34 (covering 17), 36, 41, 46, 48 (covering 24), 53, 72
 
 Edos known to be impractical for a lack of accidental symbols available: 
 > 21, 26, 28, 33, 35, 40, 45, 47, 52, 64
@@ -25,11 +25,11 @@ Edos known to be impractical for exceeding the limit of sharp value:
 1. D-centered tuning, for the least net offset; 
 2. Fifth-based key signatures, since I reckon it more intuitive. 
 
-*I prefer the original A-centered tuning / tone-based key signatures.*
+> I prefer the original A-centered tuning / tone-based key signatures.
 
 You're free to do it yourself. 
 
-*You said they're edo-agnostic, right? Why don't you do it a single file and when I launch it a messagebox pops up and let me type the edo?*
+> You said they're edo-agnostic, right? Why don't you do it a single file and when I launch it a messagebox pops up and let me type the edo?
 
 Actually, it's easier to (1) bind a hotkey (2) press it (3) boom, the notes are tuned. 
 
@@ -78,7 +78,10 @@ These edos have a sharp that raises 2 steps.
 |   -4  | ![Double flat](images/bb.png)       |   +4  | ![Double sharp](images/x.png)       |
 </details>
 
-### Sharp-3 Edos (15, 22, 29, 36, 43, 50)
+*You can use ups and downs in place of semisharps and semiflats for these edos.*
+*That happens to be the case. I didn't mean to enable it.* 
+
+### Sharp-3 Edos (15, 22, 29, 36)
 
 These edos have a sharp that raises 3 steps. 
 
@@ -88,8 +91,6 @@ These edos have a sharp that raises 3 steps.
 |   22  |  4:1  ||
 |   29  |  5:2  ||
 |   36  |  6:3  ||
-|   43  |  7:4  ||
-|   50  |  8:5  ||
 
 <details>
 <summary>These are the accidentals used by the plugin. </summary>
@@ -112,7 +113,6 @@ These edos have a sharp that raises 4 steps.
 
 |  Edo  | Steps (Large:Small) | Note |
 | :---: | :---: | --- |
-|   20  |  4:0  ||
 |   27  |  5:1  ||
 |   34  |  6:2  ||
 |   41  |  7:3  ||
@@ -221,6 +221,7 @@ declared custom key signature, behaving exactly the same way a key signature wou
 
 <details>
 <summary>For sharp value <=4: </summary>
+
 |        Accidental        | Textual representation |        Accidental         | Textual representation |
 | :--------------------------------: | :----------: | :--------------------------------: | :-----------: |
 | ![Natural](images/n.png)           | Blank / any other character |
