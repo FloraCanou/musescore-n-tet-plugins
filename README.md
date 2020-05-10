@@ -2,17 +2,17 @@
 
 Musescore plugin to automatically retune notes in any edo based on traditional heptatonic scale. 
 
-**The code is edo-agnostic!**
-Just change the number in line 7: 
+**The code is edo-agnostic!** Just change the number in line 7: 
+
 `property var n: 24`
+
 to whatever edo you like and boom, you have it! 
 
 For the accidentals used in each edo, see [Alternative Symbols for Ups and Downs Notation](https://en.xen.wiki/w/Alternative_Symbols_for_Ups_and_Downs_Notation). 
-
 That's how you're supposed to use the plugin, but undocumented use are *not* forbidden. 
 
 Edos known to work well: 
-> 10, 15, 16, 19, 22, 27, 29, 31, 34 (covering 17), 36, 41, 46, 48 (covering 24), 53, 72
+> 10, 15, 16, 19, 22, 27, 29, 31, 34 (covering 17), 36, 41, 43, 46, 48 (covering 24), 53, 72
 
 Edos known to be impractical for a lack of accidental symbols available: 
 > 21, 26, 28, 33, 35, 40, 45, 47, 52, 64
@@ -81,7 +81,7 @@ These edos have a sharp that raises 2 steps.
 *You can use ups and downs in place of semisharps and semiflats for these edos.*
 *That happens to be the case. I didn't mean to enable it.* 
 
-### Sharp-3 Edos (15, 22, 29, 36)
+### Sharp-3 Edos (15, 22, 29, 36, 43)
 
 These edos have a sharp that raises 3 steps. 
 
@@ -91,6 +91,7 @@ These edos have a sharp that raises 3 steps.
 |   22  |  4:1  ||
 |   29  |  5:2  ||
 |   36  |  6:3  ||
+|   43  |  7:4  ||
 
 <details>
 <summary>These are the accidentals used by the plugin. </summary>
@@ -194,15 +195,13 @@ These edos have a sharp that raises 6 steps.
 |  -14  | ![Double flat down2](images/bbv2.png) |  +14  | ![Double sharp up2](images/xu2.png)   |
 </details>
 
-### Flat-1 Edos (9, 16, 23)
+### Flat-1 Edos (16)
 
 These edos have a sharp that *lowers* 1 step. No custom accidentals needed. 
 
 |  Edo  | Steps (Large:Small) | Note |
 | :---: | :---: | --- |
-|    9  |  1:2  ||
 |   16  |  2:3  ||
-|   23  |  3:4  ||
 
 ### Custom key signatures
 
