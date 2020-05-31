@@ -5,7 +5,7 @@ import MuseScore 3.0
 
 MuseScore {
       property var n: 34
-      version: "2.0.0"
+      version: "2.0.2"
       description: "Retune selection to " + n + "-TET, or whole score if nothing selected."
       menuPath: "Plugins.Notes.Retune " + n + "-TET"
 
@@ -199,6 +199,8 @@ MuseScore {
       //
       // Assign the key signature object to the parms.currKeySig field!
       function scanCustomKeySig(str) {
+        if (typeof (str) !== 'string')
+          return null;
         str = str.trim();
         var keySig = {};
         var res = str.match(customKeySigRegex);
@@ -213,9 +215,8 @@ MuseScore {
           if (acc !== null)
             keySig[notes[i]] = acc;
           else
-            return null;
+            keySig[notes[i]] = 0;
         }
-
         return keySig;
       }
 
@@ -247,7 +248,7 @@ MuseScore {
           }
           endStaff = cursor.staffIdx;
         }
-        console.log(startStaff + " - " + endStaff + " - " + endTick)
+        console.log(startStaff + " - " + endStaff + " - " + endTick);
         // -------------- Actual thing here -----------------------
 
 
@@ -257,7 +258,6 @@ MuseScore {
           parms.accidentals = {};
 
           // After every staff, reset the currKeySig back to the original keySig
-
           parms.currKeySig = parms.keySig;
 
           // Even if system text is used for key sig, the text
@@ -271,18 +271,22 @@ MuseScore {
 
           // initial run to populate custom key signatures
           for (var voice = 0; voice < 4; voice++) {
-            cursor.rewind(1); // goes to start of selection, will reset voice to 0
+            // Note: either ways, it is still necesssary to go to the start of the score before
+            // applying to notes in selection as custom key signatures may precede the selection
+            // that should still apply to the score.
+
+            // NOTE: THIS IS THE ONLY RIGHT WAY (TM) TO REWIND THE CURSOR TO THE START OF THE SCORE.
+            //       ANY OTHER METHOD WOULD RESULT IN CATASTROPHIC FAILURE FOR WHATEVER REASON.
+            cursor.rewind(1); 
             cursor.voice = voice;
             cursor.staffIdx = staff;
+            cursor.rewind(0);
 
-            if (fullScore)
-              cursor.rewind(0);
+            var measureCount = 0;
+            console.log("processing custom key signatures staff: " + staff + ", voice: " + voice);
 
-              var measureCount = 0;
-              console.log("processing custom key signatures staff: " + staff + ", voice: " + voice);
-
-              while (cursor.segment && (fullScore || cursor.tick < endTick)) {
-
+            while (true) {
+              if (cursor.segment) {
                 // Check for StaffText key signature changes, then update staffKeySigHistory
                 for (var i = 0; i < cursor.segment.annotations.length; i++) {
                   var annotation = cursor.segment.annotations[i];
@@ -296,32 +300,7 @@ MuseScore {
                     });
                   }
                 }
-
-                cursor.next();
-              }
-          }
-
-          // 2 passes - one to ensure all accidentals are represented acorss
-          // all 4 voices, then the second one to apply those accidentals.
-          for (var rep = 0; rep < 2; rep++) {
-            for (var voice = 0; voice < 4; voice++) {
-              cursor.rewind(1); // goes to start of selection, will reset voice to 0
-              cursor.voice = voice; //voice has to be set after goTo
-              cursor.staffIdx = staff;
-
-              if (fullScore)
-                cursor.rewind(0) // if no selection, beginning of score
-
-              var measureCount = 0;
-
-              console.log("processing staff: " + staff + ", voice: " + voice);
-
-              // Loop elements of a voice
-              while (cursor.segment && (fullScore || cursor.tick < endTick)) {
-                // Note that the parms.accidentals object now stores accidentals
-                // from all 4 voices in a staff since microtonal accidentals from one voice
-                // should affect subsequent notes on the same line in other voices as well.
-                if (cursor.segment.tick == cursor.measure.firstSegment.tick && voice === 0 && rep === 0) {
+                if (cursor.segment.tick == cursor.measure.firstSegment.tick && voice === 0) {
                   // once new bar is reached, denote new bar in the parms.accidentals.bars object
                   // so that getAccidental will reset. Only do this for the first voice in a staff
                   // since voices in a staff shares the same barrings.
@@ -332,6 +311,38 @@ MuseScore {
                   measureCount ++;
                   console.log("New bar - " + measureCount);
                 }
+              }
+              if (!cursor.next());
+                break;
+            }
+          }
+
+          // 2 passes - one to ensure all accidentals are represented acorss
+          // all 4 voices, then the second one to apply those accidentals.
+          for (var rep = 0; rep < 2; rep++) {
+            for (var voice = 0; voice < 4; voice++) {
+              // if first pass go to start of score so that anchors.all
+              // accidentals are accounted for
+              // otherwise, go to the start of the selection to begin tuning
+
+              // NOTE: FOR WHATEVER REASON, rewind(1) must be called BEFORE assigning voice and staffIdx,
+              //       and rewind(0) MUST be called AFTER rewind(1), AND AFTER assigning voice and staffIdx.
+              cursor.rewind(1);
+              cursor.voice = voice; //voice has to be set after goTo
+              cursor.staffIdx = staff;
+
+              if (fullScore || rep == 0)
+                cursor.rewind(0);
+
+              var measureCount = 0;
+
+              console.log("processing staff: " + staff + ", voice: " + voice);
+
+              // Loop elements of a voice
+              while (cursor.segment && (fullScore || cursor.tick < endTick)) {
+                // Note that the parms.accidentals object now stores accidentals
+                // from all 4 voices in a staff since microtonal accidentals from one voice
+                // should affect subsequent notes on the same line in other voices as well.
 
                 for (var i = 0; i < staffKeySigHistory.length; i++) {
                   var keySig = staffKeySigHistory[i];
@@ -346,12 +357,12 @@ MuseScore {
                       // iterate through all grace chords
                       var notes = graceChords[i].notes;
                       for (var j = 0; j < notes.length; j++)
-                        func(notes[j], cursor.segment, parms);
+                        func(notes[j], cursor.segment, parms, rep == 0);
                     }
                     var notes = cursor.element.notes;
                     for (var i = 0; i < notes.length; i++) {
                       var note = notes[i];
-                      func(note, cursor.segment, parms);
+                      func(note, cursor.segment, parms, rep == 0);
                     }
                   }
                 }
@@ -384,6 +395,7 @@ MuseScore {
       // Returns the step offset if a prior microtonal accidental exists
       // before or at the given tick value.
       // Null if there are no explicit microtonal accidentals
+      // WARNING: DON'T USE !getAccidental() to check for Null because !0 IS TRUE!
       function getAccidental(noteLine, tick, parms) {
         // Tick of the most recent measure just before current tick
         var mostRecentBar = 0;
@@ -409,20 +421,18 @@ MuseScore {
           // 1. They are in the same bar as the current note
           // 2. They are before or at the current note's tick
           // 3. It is the most recent accidental that fulfills 1. and 2.
-          if (acc.tick >= mostRecentBar && acc.tick <= tick && acc.tick > oldTick) {
+          if (acc.tick >= mostRecentBar && acc.tick <= tick && acc.tick >= oldTick) {
             console.log('note line: ' + noteLine + ', steps: ' + acc.offset + ', tick: ' + acc.tick);
             console.log('acc.tick: ' + acc.tick + ', mostRecentBar: ' + mostRecentBar + ', tick: ' + tick + ', oldTick: ' + oldTick);
             offset = acc.offset;
             oldTick = acc.tick;
           }
         }
-
         return offset;
       }
 
       function tuneNote(note, segment, parms) {
         var tpc = note.tpc;
-        var acc = note.accidental;
 
         // If tpc is non-natural, there's no need to go through additional steps,
         // since accidentals and key sig are already taken into consideration
@@ -551,15 +561,16 @@ MuseScore {
         }
 
         //NOTE: Only special accidentals need to be remembered.
+        var accOffset = null;
         if (note.accidental) {
-          var accOffset = null;
-          console.log('Note: ' + baseNote + ', Line: ' + note.line + ', Special Accidental: ' + note.accidental);
-          if (note.accidentalType == Accidental.SHARP_SLASH4)
+          console.log('Note: ' + baseNote + ', Line: ' + note.line + 
+                      ', Special Accidental: ' + note.accidentalType);
+          if (note.accidentalType == Accidental.NATURAL)
+            accOffset = 0;
+          else if (note.accidentalType == Accidental.SHARP_SLASH4)
             accOffset = 3*sharpValue/2;
           else if (note.accidentalType == Accidental.SHARP_SLASH)
             accOffset = sharpValue/2;
-          else if (note.accidentalType == Accidental.NATURAL)
-            accOffset = 0;
           else if (note.accidentalType == Accidental.MIRRORED_FLAT)
             accOffset = -sharpValue/2;
           else if (note.accidentalType == Accidental.MIRRORED_FLAT2)
@@ -655,7 +666,7 @@ MuseScore {
         }
 
         // Check for prev accidentals first, will be null if not present
-        var stepsFromBaseNote = getAccidental(note.line, segment.tick, parms);
+        var stepsFromBaseNote = accOffset !== null ? accOffset : getAccidental(note.line, segment.tick, parms);
         if (stepsFromBaseNote === null) {
           // No accidentals - check key signature.
           stepsFromBaseNote = parms.currKeySig[baseNote];

@@ -4,7 +4,7 @@ import QtQuick.Controls.Styles 1.3
 import MuseScore 3.0
 
 MuseScore {
-      property var n: 27
+      property var n: 17
       version: "2.0.2"
       description: "Retune selection to " + n + "-TET, or whole score if nothing selected."
       menuPath: "Plugins.Notes.Retune " + n + "-TET"
