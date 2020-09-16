@@ -4,9 +4,9 @@ import QtQuick.Controls.Styles 1.3
 import MuseScore 3.0
 
 MuseScore {
-      version: "2.2.0"
-      description: "Retune selection to any EDO temperament, or whole score if nothing selected."
-      menuPath: "Plugins.n-EDO.Tune"
+      version: "2.2.1"
+      description: "Retune selection to any EDO temperament, or whole score if nothing selected. Customized by Flora Canou. "
+      menuPath: "Plugins.n-EDO.Tune (Flora's Custom)"
 
       // WARNING! This doesn't validate the accidental code!
       property variant customKeySigRegex: /\.(.*)\.(.*)\.(.*)\.(.*)\.(.*)\.(.*)\.(.*)/g
@@ -113,7 +113,7 @@ MuseScore {
 
       function getCentOffset(noteName, stepOffset, edo, center) {
         var stepSize = 1200.0 / edo;
-        var fifthStep = Math.round(edo * Math.log(3/2) / Math.LN2);
+        var fifthStep = Math.round (edo * Math.log (3/2) / Math.LN2);
         var sharpValue = 7 * fifthStep - 4 * edo;
 
         var regularAccCentOffset = 0;
@@ -178,7 +178,7 @@ MuseScore {
       }
 
       function convertAccidentalToStepsOrNull(acc, edo) {
-        var fifthStep = Math.round(edo * Math.log(3/2) / Math.LN2);
+        var fifthStep = Math.round (edo * Math.log (3/2) / Math.LN2);
         var sharpValue = 7 * fifthStep - 4 * edo;
         switch(acc.trim()) {
         case 'db':
@@ -280,11 +280,11 @@ MuseScore {
       // a key signature object if str is a valid custom key sig code or null.
       //
       // Valid key sig code is denoted as such:
-      //  .c.d.e.f.g.a.b
-      // where identifiers c thru b denote a valid accidental code of which
+      //  .f.c.g.d.a.e.b
+      // where identifiers f thru b denote a valid accidental code of which
       // will apply to the respective notes.
       //
-      // For example, this is F-down major: .v.v.v.v.v.v.bv
+      // For example, this is Fv major: .v.v.v.v.v.v.bv
       //
       // whitespace can be placed between dots and accidentals for readability.
       //
@@ -298,7 +298,7 @@ MuseScore {
         var keySig = {};
         var res = str.match(customKeySigRegex);
         // For code golfing
-        var notes = [null, 'c', 'd', 'e', 'f', 'g', 'a', 'b'];
+        var notes = [null, 'f', 'c', 'g', 'd', 'a', 'e', 'b'];
 
         if (res === null)
           return null;
@@ -587,7 +587,7 @@ MuseScore {
       // will not be tuned.
       function tuneNote(note, segment, parms, scanOnly) {
         var tpc = note.tpc;
-        var fifthStep = Math.round(parms.currEdo * Math.log(3/2) / Math.LN2);
+        var fifthStep = Math.round (parms.currEdo * Math.log (3/2) / Math.LN2);
         var sharpValue = 7*fifthStep - 4*parms.currEdo;
 
         // If tpc is non-natural, there's no need to go through additional steps,
@@ -875,12 +875,12 @@ MuseScore {
           THIS SHOULD BE READONLY!
         */
         parms.keySig = {
-          'c': 0,
-          'd': 0,
-          'e': 0,
           'f': 0,
+          'c': 0,
           'g': 0,
+          'd': 0,
           'a': 0,
+          'e': 0,
           'b': 0
         };
 
