@@ -1,2 +1,4 @@
 *.qmlc
 test.qml
+README.md
+tune n-edo fmc.qml
